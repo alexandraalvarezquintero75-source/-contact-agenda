@@ -1,1 +1,0 @@
-print("hi, alexa, i am a developer ")
