@@ -26,3 +26,6 @@ build/
 .DS_Store
 .vscode/
 .idea/
+
+# === Python virtual environment ===
+venv/
