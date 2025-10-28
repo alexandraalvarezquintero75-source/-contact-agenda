@@ -2,8 +2,9 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session, sessionmaker
 from app.db.dataBase import engine
 from app.models.user_model import User
-from app.schemas.user_schema import UserCreate, UserResponse, UserLogin
+from app.schemas.user_schema import UserCreate, UserResponse
 from app.auth.token import create_access_token
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy import select
 import bcrypt
 
@@ -47,8 +48,9 @@ def register_user(data: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/login")
-def login_user(data: UserLogin, db: Session = Depends(get_db)):
-    user = db.execute(select(User).where(User.email == data.email)).scalar_one_or_none()
+def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+
+    user = db.execute(select(User).where(User.email == form_data.username)).scalar_one_or_none()
 
     if not user:
         raise HTTPException(
@@ -57,7 +59,7 @@ def login_user(data: UserLogin, db: Session = Depends(get_db)):
         )
 
     
-    if not bcrypt.checkpw(data.password.encode("utf-8"), user.password.encode("utf-8")):
+    if not bcrypt.checkpw(form_data.password.encode("utf-8"), user.password.encode("utf-8")):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Contraseña incorrecta"

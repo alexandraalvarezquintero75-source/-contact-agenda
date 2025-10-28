@@ -30,6 +30,7 @@ def get_contacts(
     return db.query(Contact).filter(Contact.user_id == current_user.id).all()
 
 
+
 @router.delete("/contacts/{contact_id}")
 def delete_contact(
     contact_id: int,
