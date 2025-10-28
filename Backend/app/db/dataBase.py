@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine,MetaData
+from sqlalchemy.orm import declarative_base
 from dotenv import load_dotenv
 import os
 
@@ -9,6 +10,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 
 meta_data = MetaData()
+Base = declarative_base()
 
 try: 
     with engine.connect() as connection:
