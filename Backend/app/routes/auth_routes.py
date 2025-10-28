@@ -21,9 +21,7 @@ def get_db():
     finally:
         db.close()
 
-# ==============================
-# REGISTRO DE USUARIO
-# ==============================
+
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register_user(data: UserCreate, db: Session = Depends(get_db)):
@@ -35,10 +33,10 @@ def register_user(data: UserCreate, db: Session = Depends(get_db)):
             detail="El correo electrónico ya está registrado"
         )
 
-    # Hashear la contraseña
+
     hashed_password = bcrypt.hashpw(data.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
-    # Crear el nuevo usuario
+    
     new_user = User(email=data.email, password=hashed_password)
     db.add(new_user)
     db.commit()
@@ -47,9 +45,6 @@ def register_user(data: UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-# ==============================
-# LOGIN DE USUARIO
-# ==============================
 
 @router.post("/login")
 def login_user(data: UserLogin, db: Session = Depends(get_db)):
@@ -61,14 +56,13 @@ def login_user(data: UserLogin, db: Session = Depends(get_db)):
             detail="El correo no está registrado"
         )
 
-    # Verificar contraseña
+    
     if not bcrypt.checkpw(data.password.encode("utf-8"), user.password.encode("utf-8")):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Contraseña incorrecta"
         )
 
-    # Crear token de acceso
     access_token = create_access_token(data={"sub": str(user.id)})
 
     return {

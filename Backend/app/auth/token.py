@@ -17,9 +17,7 @@ if not SECRET_KEY or not ALGORITHM:
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 def create_access_token(data: dict):
-    """
-    Crea un token JWT con una fecha de expiración.
-    """
+
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
@@ -27,9 +25,7 @@ def create_access_token(data: dict):
     return encoded_jwt
 
 def verify_token(token: str):
-    """
-    Verifica si el token es válido.
-    """
+    
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
@@ -37,9 +33,7 @@ def verify_token(token: str):
         return None
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
-    """
-    Extrae y valida el usuario actual a partir del token JWT.
-    """
+    
     payload = verify_token(token)
     if payload is None:
         raise HTTPException(
