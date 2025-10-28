@@ -32,10 +32,8 @@ def register_user(data: UserCreate, db: Session = Depends(get_db)):
             detail="El correo electrónico ya está registrado"
         )
 
-    # Hashear la contraseña
     hashed_password = bcrypt.hashpw(data.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
-    # Crear el nuevo usuario
     new_user = User(email=data.email, password=hashed_password)
     db.add(new_user)
     db.commit()
