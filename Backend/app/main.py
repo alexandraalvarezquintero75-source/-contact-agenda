@@ -1,5 +1,8 @@
 from fastapi import FastAPI
-from Backend.app.db.dataBase import engine
+from app.routes import auth_routes
+from app.db.dataBase import engine
+from app.models import user_model
+
 
 app = FastAPI(
     title="ContactDesk API",
@@ -7,3 +10,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.include_router(auth_routes.router)
+
+user_model.Base.metadata.create_all(bind=engine)
