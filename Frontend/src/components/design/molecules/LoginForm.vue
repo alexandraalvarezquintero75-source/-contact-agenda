@@ -25,23 +25,39 @@
       <div v-if="errors.password" class="invalid-feedback">{{ errors.password }}</div>
     </div>
 
+
     <button type="submit" class="btn btn-primary w-100">
       Iniciar sesión
     </button>
+
+    <div class="text-center mt-3">
+  <span
+    class="text-primary"
+    style="cursor: pointer; text-decoration: underline;"
+    @click="goToRegister"
+  >
+    Registrar
+  </span>
+</div>
   </form>
 </template>
 
 <script setup>
 import { useLoginValidation } from '@/components/design/molecules/useLoginValidation'
 import { auth } from '@/services/auth'
+import { useRouter } from 'vue-router'
 
 const { values, errors, validate } = useLoginValidation()
 const { login } = auth()
+const router = useRouter()
 
 const onSubmit = async () => {
   if (await validate()) {
     await login(values)
   }
+}
+const goToRegister = () => {
+  router.push('/register')
 }
 
 
