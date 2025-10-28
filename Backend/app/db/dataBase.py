@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine,MetaData
 from sqlalchemy.orm import declarative_base
 from dotenv import load_dotenv
+from sqlalchemy.orm import sessionmaker
 import os
 
 load_dotenv()
@@ -17,3 +18,12 @@ try:
         print("successful connection to database")
 except Exception as e:
     print("not connected to database")
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

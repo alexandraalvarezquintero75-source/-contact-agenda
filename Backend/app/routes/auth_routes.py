@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session, sessionmaker
 from app.db.dataBase import engine
 from app.models.user_model import User
-from app.schemas.user_schema import UserCreate, UserResponse
+from app.schemas.user_schema import UserCreate, UserResponse, UserLogin
 from app.auth.token import create_access_token
 from sqlalchemy import select
 import bcrypt
@@ -52,7 +52,7 @@ def register_user(data: UserCreate, db: Session = Depends(get_db)):
 # ==============================
 
 @router.post("/login")
-def login_user(data: UserCreate, db: Session = Depends(get_db)):
+def login_user(data: UserLogin, db: Session = Depends(get_db)):
     user = db.execute(select(User).where(User.email == data.email)).scalar_one_or_none()
 
     if not user:
