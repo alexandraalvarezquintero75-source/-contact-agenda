@@ -33,10 +33,10 @@
 
 <script setup>
 import { useLoginValidation } from '@/components/design/molecules/useLoginValidation'
-import { useLogin } from '@/components/design/molecules/useLogin'
+import { auth } from '@/services/auth'
 
 const { values, errors, validate } = useLoginValidation()
-const { login } = useLogin()
+const { login } = auth()
 
 const onSubmit = async () => {
   if (await validate()) {
