@@ -4,28 +4,34 @@ __pycache__/
 *.pyo
 *.pyd
 
-# === Node ===
+venv/
+.env/
+ENV/
+.venv/
+
+# === Node / Frontend ===
 node_modules/
 **/node_modules/
 
-# === Logs ===
+dist/
+build/
+Frontend/.vite/
+
+# === Logs / temporales ===
 logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.tmp
+*.bak
 
-# === Build ===
-dist/
-build/
-
-# === Environment files ===
-*.env
-
-# === OS / Editor ===
+# === Environment / config files ===
+*.env (ya está más arriba)
 .DS_Store
+Thumbs.db
+
+# === Editors / IDEs ===
 .vscode/
 .idea/
-
-# === Python virtual environment ===
-venv/
+*.code-workspace
