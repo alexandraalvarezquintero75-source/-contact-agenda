@@ -1,23 +1,16 @@
-import axios from 'axios'
-import Swal from 'sweetalert2'
+import { useRouter } from 'vue-router'
 
 export function useLogin() {
+  const router = useRouter()
+
   const login = async (values) => {
-    try {
+    const { user, password } = values
 
-      const { data } = await axios.post('/api/login', values)
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Bienvenido',
-        text: `Hola ${data.user?.name || values.user}`
-      })
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al iniciar sesión',
-        text: error.response?.data?.message || 'Credenciales incorrectas'
-      })
+    if (user === 'admin' && password === '1234') {
+      // Si el login es exitoso, redirige al dashboard
+      router.push('/dashboard')
+    } else {
+      alert('Usuario o contraseña incorrectos')
     }
   }
 
