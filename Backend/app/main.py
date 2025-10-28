@@ -18,8 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 app.include_router(auth_routes.router)
 app.include_router(contacts_routes.router)
 

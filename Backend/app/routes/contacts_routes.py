@@ -8,7 +8,7 @@ from app.models.user_model import User
 
 router = APIRouter(tags=["Contacts"])
 
-# Crear un contacto
+
 @router.post("/contacts", response_model=ContactResponse)
 def create_contact(
     contact: ContactCreate,
@@ -21,7 +21,7 @@ def create_contact(
     db.refresh(new_contact)
     return new_contact
 
-# Listar todos los contactos del usuario autenticado
+
 @router.get("/contacts", response_model=list[ContactResponse])
 def get_contacts(
     db: Session = Depends(get_db),
@@ -29,7 +29,8 @@ def get_contacts(
 ):
     return db.query(Contact).filter(Contact.user_id == current_user.id).all()
 
-# Eliminar un contacto
+
+
 @router.delete("/contacts/{contact_id}")
 def delete_contact(
     contact_id: int,
