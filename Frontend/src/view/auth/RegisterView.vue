@@ -2,7 +2,6 @@
   <div class="container mt-5" style="max-width: 400px;">
     <h2 class="text-center mb-3">Registro</h2>
 
-
     <form @submit.prevent="onSubmit">
       <!-- Email -->
       <div class="mb-3">
@@ -52,19 +51,45 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { registerUser } from '@/services/register'
+import Swal from 'sweetalert2'
 
 
 const router = useRouter()
-
-
 const values = ref({
   email: '',
   password: ''
 })
-
-// Validaciones simples
 const errors = ref({})
 
+
+const onSubmit = async () => {
+  try {
+    await registerUser(values.value)
+
+    await Swal.fire({
+      icon: 'success',
+      title: 'Registro exitoso',
+      text: 'Tu cuenta ha sido creada correctamente.',
+      confirmButtonColor: '#28a745'
+    })
+
+    router.push('/')
+  } catch (error) {
+
+    if (error.response && error.response.data && error.response.data.errors) {
+      errors.value = error.response.data.errors
+    } else {
+
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'Ha ocurrido un error inesperado. Por favor, intenta nuevamente más tarde.',
+        confirmButtonColor: '#dc3545'
+      })
+    }
+  }
+}
 
 
 const goToLogin = () => {
