@@ -30,24 +30,10 @@
       </div>
 
       <!-- Fila 2 -->
-      <!-- <div class="row mb-3">
-        <div class="col-md-4">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Teléfono"
-            v-model="formUser.phone_number"
-          />
-        </div>
-        <div class="col-md-4">
-          <input
-            type="password"
-            class="form-control"
-            placeholder="Contraseña"
-            v-model="formUser.password"
-          />
-        </div>
-      </div> -->
+      <div class="row mb-3">
+      
+        
+      </div>
 
     </div>
   </form>
