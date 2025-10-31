@@ -1,19 +1,23 @@
 <template>
-  <RouterView />
+  <div class="d-flex">
+    <SidebarMenu />
+
+    <div class="main-layout flex-grow-1 d-flex flex-column min-vh-100">
+      <!-- <Header /> -->
+
+      <main class="flex-grow-1 p-3">
+        <RouterView />
+      </main>
+
+      <!-- <Footer /> -->
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { RouterView } from 'vue-router'
-import api from './services/api.js'
-import { onMounted } from 'vue';
+import SidebarMenu from './components/design/organisms/sidebarMenu.vue'
 
-onMounted(async () => {
-  try {
-    const res = await api.get("/login")
-    console.log(" Conexión exitosa con backend:", res.data)
-  } catch (error) {
-    console.error(" Error al conectar con backend:", error)
-  }
-})
+
 
 </script>

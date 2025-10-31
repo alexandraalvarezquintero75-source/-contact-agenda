@@ -1,35 +1,32 @@
-@import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
+/* .d-flex {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+} */
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+/* .sidebar-menu {
+  width: 250px;
+  flex-shrink: 0; 
+  height: 100vh;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 1000;
+} */
+
+
+.main-layout {
+  margin-left: 250px; /* mismo ancho que el sidebar */
+  width: calc(100% - 250px);
+  overflow-y: auto;
+  background-color: white;
 }
