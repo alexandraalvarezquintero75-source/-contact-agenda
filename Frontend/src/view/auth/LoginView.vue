@@ -28,7 +28,7 @@ const router = useRouter()
 
 const login = () => {
   if (username.value === 'admin' && password.value === '1234') {
-    router.push('/home') // 👈 cambia /home por la ruta de tu dashboard
+    router.push('/home') 
   } else {
     alert('Usuario o contraseña incorrectos')
   }
