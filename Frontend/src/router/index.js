@@ -3,11 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Importar rutas por módulo
 import homeRoutes from './home.js'
 import formRoutes from './form.js'
+import loginRoutes from './login.js'
 
 // Combinar todas las rutas en un solo array
 const routes = [
   ...homeRoutes,
-  ...formRoutes
+  ...formRoutes,
+  ...loginRoutes
 ]
 
 
