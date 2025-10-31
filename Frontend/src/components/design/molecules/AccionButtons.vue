@@ -2,9 +2,9 @@
   <div class="d-flex justify-content-end">
     <BaseButton
       class="btn-circle text-success hover-success"
-      icon="bi bi-save"
       @click="$emit('save', entityId)"
     >
+    +
     </BaseButton>
 
     <BaseButton
@@ -33,21 +33,6 @@
       icon="bi bi-pencil"
       @click="$emit('edit', entityId)"
     >
-    </BaseButton>
-    <BaseButton
-      class="btn-circle btn-warning text-warning"
-      @click="$emit('save')"
-      title="Guardar"
-    >
-      Guardar
-    </BaseButton>
-    <BaseButton
-      type="button"
-      class="btn btn-secondary rounded-pill px-4 py-2"
-      @click="$emit('cancel')"
-      title="Cancelar"
-    >
-      Cancelar
     </BaseButton>
   </div>
 </template>
