@@ -2,7 +2,7 @@ import home from "@/view/home/homeContact.vue"
 
 export default [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: home
   }

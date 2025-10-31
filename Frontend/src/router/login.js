@@ -2,7 +2,7 @@ import LoginView from '@/view/auth/LoginView.vue'
 
 export default [
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: LoginView
   }
