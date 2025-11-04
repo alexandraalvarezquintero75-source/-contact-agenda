@@ -33,8 +33,15 @@ def get_contact_by_name(db: Session, user_id: int, name: str):
 
 
 def create_contact(db: Session, user_id: int, contact_data):
+    data = contact_data.model_dump()
 
-    new_contact = Contact(**contact_data.model_dump(), user_id=user_id)
+    if all(not str(value).strip() for value in data.values()):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Empty contacts are not allowed."
+        )
+
+    new_contact = Contact(**data, user_id=user_id)
     db.add(new_contact)
     db.commit()
     db.refresh(new_contact)
