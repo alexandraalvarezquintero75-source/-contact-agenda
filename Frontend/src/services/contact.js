@@ -11,7 +11,7 @@ export const createContact = (contactData) => {
 // Obtener todos los contactos del usuario autenticado
 export const getContacts = () => {
     return api({
-        url: 'Contacts',
+        url: 'contacts', 
         method: 'get'
     })
 }
